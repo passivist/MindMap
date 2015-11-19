@@ -30,7 +30,6 @@ MindMap {
 		// add Pen.stroke to draw in the end
 		func = { Pen.stroke; } <> func;
 		view.drawFunc = func;
-
 	}
 
 }
@@ -75,15 +74,13 @@ MindMapArrow {
 		pFrom = pointsFrom[distFromTo.order.first];
 		pTo	= pointsTo[distToFrom.order.first];
 
-
+		// build the function
 		func = {
 			Pen.arrow(pFrom, pTo);
 		};
 
 		^func
 	}
-
-
 }
 
 MindMapTextBox {
@@ -105,6 +102,7 @@ MindMapTextBox {
 		rect		= this.rect;
 		font		= this.font;
 
+		// build the function
 		func = {
 			Pen.stringCenteredIn(string, rect, font);
 			if(drawBox){ Pen.addRect( rect.resizeBy(10, 10).center_(rect.center) ); };
