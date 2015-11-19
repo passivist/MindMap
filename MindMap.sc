@@ -1,5 +1,9 @@
 /*
-* MindMap ist ein Container für drawFuncs die dann in eine Andere DrawFunc übergeben werden können
+* MindMap is a class for drawing MindMaps with SuperCollider.
+* It works by generating drawFuncs for use with the Pen object.
+*
+* Dependencies:
+* wslib for Arrow.draw
 */
 MindMap {
 	var <>funcArray;
@@ -20,8 +24,10 @@ MindMap {
 	draw { arg view;
 		var func = {};
 
+		// stick all the drawFuncs together
 		this.funcArray.do{ |inFunc| func = inFunc <> func};
 
+		// add Pen.stroke to draw in the end
 		func = { Pen.stroke; } <> func;
 		view.drawFunc = func;
 
@@ -46,6 +52,11 @@ MindMapArrow {
 		from	= this.from.rect;
 		to 	= this.to.rect;
 
+		// calculate the best connection points for the arrow
+		// -> still needs some work
+		// works in the moment by finding the smallest distance between the points of two
+		// rects which are resised versions of the rects of the from and to objects
+
 		bigFrom	= from.resizeBy(puffer, puffer).center_(from.center);
 		bigTo		= to.resizeBy(puffer, puffer).center_(to.center);
 
@@ -66,10 +77,6 @@ MindMapArrow {
 
 
 		func = {
-			/*
-			Pen.addRect(bigFrom);
-			Pen.addRect(bigTo);
-			*/
 			Pen.arrow(pFrom, pTo);
 		};
 
@@ -102,7 +109,6 @@ MindMapTextBox {
 			Pen.stringCenteredIn(string, rect, font);
 			if(drawBox){ Pen.addRect( rect.resizeBy(10, 10).center_(rect.center) ); };
 		};
-
 
 		^func;
 	}
