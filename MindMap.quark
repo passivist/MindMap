@@ -1,0 +1,11 @@
+(
+	\name: 			"MindMap",
+	\path: 			"MindMap",
+	\summary:		"A class for generating simple mindmaps in SC",
+	\isCompatible:	{ Main.versionAtMost(3, 7).not },
+	\author: 		"Raffael Seyfried",
+	\organisation:	"IMM Duesseldorf",
+	\helpdoc:		"help",
+   \since: 		   "2015",
+	\version:		0.1
+)
